@@ -16,5 +16,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'spring'
   gem 'simplecov'
+  gem 'pry'
+  gem 'binding_of_caller'
+  gem 'better_errors'
 end
 
