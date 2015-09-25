@@ -1,14 +1,12 @@
 require 'spec_helper'
 
-describe "Idea Index", :type => :feature, :js => true do
-  before(:each) do
+describe "Idea Index", :type => :feature do
+   it "lists an idea" do
     visit root_path
     fill_in "Title", with: "Make Tea"
     fill_in "Body", with: "Make echinacea tea"
     click_link_or_button "Save"
-  end
 
-  it "lists an idea" do
     expect(page).to have_content("Make Tea")
   end
 
