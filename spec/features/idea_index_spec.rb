@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Idea Index", :type => :feature do
-   it "lists an idea" do
+   xit "lists an idea" do
     visit root_path
     fill_in "Title", with: "Make Tea"
     fill_in "Body", with: "Make echinacea tea"
