@@ -1,3 +1,3 @@
 class Idea < ActiveRecord::Base
-  enum quality: [:swill, :plausible, :genius]
+  enum quality: [:Swill, :Plausible, :Genius]
 end
