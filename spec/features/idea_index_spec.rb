@@ -13,9 +13,11 @@ describe "Idea Index", :type => :feature do
     expect_idea_to_have_title(title: "Make Tea")
   end
 
-  xit "has a body that is truncated to 100 characters rounded to the nearest word" do
+  it "has a body that is truncated to 100 characters rounded to the nearest word" do
     visit root_path
     fill_in "Title", with: "Make Soup"
-    fill_in "Body", with: "#{"a" * 100}"
+    fill_in "Body", with: "#{"aaaa " * 30}"
+    click_link_or_button "Save"
+    expect(page).to have_content("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa...")
   end
 end

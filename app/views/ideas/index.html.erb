@@ -2,7 +2,7 @@
 <% @ideas.reverse_each do |idea| %>
   Created At: <%= time_ago_in_words(idea.created_at) %></br>
   Title:  <%= idea.title %></br>
-  Body:  <%= idea.body %></br>
+  Body:  <%= truncate(idea.body, length: 103, separator: ' ') %></br>
   Quality:  <%= idea.quality %></br>
   </br>
 <% end %>
