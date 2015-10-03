@@ -8,6 +8,8 @@ describe "Idea Index", :type => :feature do
     click_link_or_button "Save"
 
     expect(page).to have_content("Make Tea")
+    expect(page).to have_content("Make echinacea tea")
+    expect(page).to have_content("Swill")
     expect_idea_to_have_title(title: "Make Tea")
   end
 
