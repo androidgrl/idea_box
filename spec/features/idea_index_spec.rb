@@ -30,4 +30,15 @@ describe "Idea Index", :type => :feature do
     click_on "Delete"
     expect(page).not_to have_content("Make Tea")
   end
+
+  it "can edit an item" do
+    visit root_path
+    fill_in "Title", with: "Make Tea"
+    fill_in "Body", with: "Make echinacea tea"
+    click_link_or_button "Save"
+
+    click_on "Edit"
+    fill_in "Title", with: "Drink Tea"
+    fill_in "Body", with: "Savor and sip echinacea tea"
+  end
 end
