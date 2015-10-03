@@ -1,16 +1,10 @@
 <h1>Ideas:</h1>
-<% @ideas.each_with_index do |idea, index| %>
-  <%= index + 1 %>
-  <%= idea.title %></br>
-  <%= idea.body %></br>
-  <%= idea.quality %></br>
+<% @ideas.reverse_each do |idea| %>
+  Created At: <%= time_ago_in_words(idea.created_at) %></br>
+  Title:  <%= idea.title %></br>
+  Body:  <%= idea.body %></br>
+  Quality:  <%= idea.quality %></br>
   </br>
 <% end %>
 <h2>Make a New Idea:</h2>
-<%= form_for(@idea) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %></br>
-  <%= f.label :body %>
-  <%= f.text_field :body %></br>
-  <%= f.submit "Save" %>
-<% end %>
+<%= render partial: "ideas/form", locals: {idea: @idea} %>
