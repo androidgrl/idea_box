@@ -7,14 +7,14 @@ function formData(){
     };
 }
 
-function submitIdea(){
+function submitIdea(event){
     event.preventDefault();
     postData();
 }
 
 function postData(){
     $.post('/ideas', formData(), function(data){
-        $('#ideas').prepend(data.slice(925, 1755));
+        $('#ideas').prepend(data);
     });
 }
 
