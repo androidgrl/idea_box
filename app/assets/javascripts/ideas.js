@@ -1,6 +1,13 @@
+function formData(){
+    return {
+        title: $('#idea_title').val(),
+        body: $('#idea_body').val()
+    };
+}
+
 function submitIdea(){
     event.preventDefault();
-    alert('Hello Jamie');
+    console.log(formData());
 }
 
 $('document').ready(function(){
