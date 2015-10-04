@@ -63,6 +63,7 @@ describe "Idea Index", :type => :feature do
     click_on "Thumbs Up"
 
     click_on "Thumbs Down"
+    expect(page).to have_http_status(200)
     expect(page).to have_content("Swill")
   end
 end

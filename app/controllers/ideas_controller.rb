@@ -35,6 +35,16 @@ class IdeasController < ApplicationController
     redirect_to root_path
   end
 
+  def thumbs_down
+    idea = Idea.find(params[:id])
+    if idea.quality == "Genius"
+      idea.update_attributes(quality: "Plausible")
+    elsif idea.quality == "Plausible"
+      idea.update_attributes(quality: "Swill")
+    end
+    redirect_to root_path
+  end
+
   private
 
   def idea_params
