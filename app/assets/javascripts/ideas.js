@@ -1,6 +1,8 @@
+function submitIdea(){
+    event.preventDefault();
+    alert('Hello Jamie');
+}
+
 $('document').ready(function(){
-    $('#new_idea').submit(function(event){
-        event.preventDefault();
-        alert('Hello There!');
-    });
+    $('#new_idea').submit(submitIdea);
 });
