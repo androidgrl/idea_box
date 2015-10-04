@@ -50,7 +50,19 @@ describe "Idea Index", :type => :feature do
     expect(page).to have_content("Swill")
 
     click_on "Thumbs Up"
+    expect(page).to have_http_status(200)
     expect(page).not_to have_content("Swill")
     expect(page).to have_content("Plausible")
+  end
+
+  it "can thumbs up an idea" do
+    visit root_path
+    fill_in "Title", with: "Make Tea"
+    fill_in "Body", with: "Make echinacea tea"
+    click_link_or_button "Save"
+    click_on "Thumbs Up"
+
+    click_on "Thumbs Down"
+    expect(page).to have_content("Swill")
   end
 end
