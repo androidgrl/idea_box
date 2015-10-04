@@ -13,7 +13,9 @@ function submitIdea(){
 }
 
 function postData(){
-    $.post('/ideas', formData());
+    $.post('/ideas', formData(), function(data){
+        $('#ideas').prepend(data);
+    });
 }
 
 $('document').ready(function(){
