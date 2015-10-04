@@ -13,6 +13,24 @@ describe "Idea Index", :type => :feature do
     expect_idea_to_have_title(title: "Make Tea")
   end
 
+  it "lists ideas in descending chronological order" do
+    visit root_path
+    fill_in "Title", with: "Make Tea"
+    fill_in "Body", with: "Make echinacea tea"
+    click_link_or_button "Save"
+    expect(page).to have_http_status(200)
+
+    visit root_path
+    fill_in "Title", with: "Make Soup"
+    fill_in "Body", with: "Make chicken soup"
+    click_link_or_button "Save"
+    expect(page).to have_http_status(200)
+
+    within all("li")[1] do
+      expect(page).to have_content("Make Soup")
+    end
+  end
+
   it "has a body that is truncated to 100 characters rounded to the nearest word" do
     visit root_path
     fill_in "Title", with: "Make Soup"
