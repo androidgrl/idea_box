@@ -1,7 +1,9 @@
 function formData(){
     return {
-        title: $('#idea_title').val(),
-        body: $('#idea_body').val()
+        idea: {
+            title: $('#idea_title').val(),
+            body: $('#idea_body').val()
+        }
     };
 }
 
