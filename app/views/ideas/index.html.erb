@@ -1,5 +1,5 @@
 <h1>Ideas:</h1>
-<ul>
+<ul id="ideas">
   <% @ideas.each do |idea| %>
     <li>Created At: <%= time_ago_in_words(idea.created_at) %></li>
     <li>Title:  <%= idea.title %></li>

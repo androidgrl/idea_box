@@ -5,8 +5,8 @@ class IdeasController < ApplicationController
   end
 
   def create
-    Idea.create(idea_params)
-    redirect_to root_path
+    @idea = Idea.create(idea_params)
+    respond_with @idea, status: 201, location: root_path
   end
 
   def destroy
