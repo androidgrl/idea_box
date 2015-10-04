@@ -1,7 +1,7 @@
 class IdeasController < ApplicationController
   def index
     @idea = Idea.new
-    @ideas = Idea.all
+    @ideas = Idea.newest_first
   end
 
   def create
