@@ -14,7 +14,7 @@ function submitIdea(){
 
 function postData(){
     $.post('/ideas', formData(), function(data){
-        $('#ideas').prepend(data);
+        $('#ideas').prepend(data.slice(925, 1755));
     });
 }
 
