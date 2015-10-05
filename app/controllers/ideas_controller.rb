@@ -6,13 +6,13 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.create(idea_params)
-    render json: {title: @idea.title, body: @idea.body}
+    render json: {title: @idea.title, body: @idea.body, id: @idea.id}
   end
 
   def destroy
-    idea = Idea.find(params[:id])
-    idea.destroy
-    redirect_to root_path
+    @idea = Idea.find(params[:id])
+    @idea.destroy
+    render json: {title: @idea.title, body: @idea.body, id: @idea.id}
   end
 
   def edit
