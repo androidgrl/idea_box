@@ -45,7 +45,23 @@ function deleteIdea(){
     });
 }
 
+function loadIdeas(){
+    console.log("Loading Ideas Have a Nice Day");
+    $.ajax({
+        url: '/ideas.json',
+        type: 'GET',
+        success: function(data){
+            console.log(data);
+            data.forEach(function(idea){
+                $('#ideas').append(makeIdea(idea));
+            });
+            //need ideas so I can iterate over them
+        }
+    });
+}
+
 $('document').ready(function(){
     $('#submit').on("click", submitIdea);
-    $('#ideas').delegate(".delete", "click", deleteIdea)
+    $('#ideas').delegate(".delete", "click", deleteIdea);
+    loadIdeas();
 });
