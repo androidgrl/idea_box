@@ -1,15 +1,5 @@
 <h1>Ideas:</h1>
 <ul id="ideas">
-  <% @ideas.each do |idea| %>
-    <li>Title:  <%= idea.title %></li>
-    <li>Body:  <%= truncate(idea.body, length: 103, separator: ' ') %></li>
-    <li>Quality:  <%= idea.quality %></li>
-    <button id="delete">Delete</button></br>
-    <button id="edit">Edit</button></br>
-    <button id="thumbs_up">Thumbs Up</button></br>
-    <button id="thumbs_down">Thumbs Down</button></br>
-    </br>
-  <% end %>
 </ul>
 <h2>Make a New Idea:</h2>
 <%= render partial: "ideas/form", locals: {idea: @idea} %>
