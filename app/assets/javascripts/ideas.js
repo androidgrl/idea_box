@@ -21,7 +21,8 @@ function postData(){
 
 function makeIdea(data){
     console.log(data);
-    return "<li>" + "Title:  " + data.title + "</li>"
+    return  "<div id=idea-" + data.id + ">"
+        + "<li>" + "Title:  " + data.title + "</li>"
         + "<li>" + "Body:  " + data.body + "</li>"
         + "<li>Quality:  Swill</li>"
         + "<button class='delete' id="+ data.id +">Delete</button></br>"
@@ -29,6 +30,7 @@ function makeIdea(data){
         + "<button id='thumbs_up'>Thumbs Up</button></br>"
         + "<button id='thumbs_down'>Thumbs Down</button></br>"
         + "</br>"
+        + "</div>"
 }
 
 function deleteIdea(){
@@ -38,15 +40,12 @@ function deleteIdea(){
         type: 'DELETE',
         success: function(result){
             console.log('I am deleted thank you');
-            $('ul').html("");
+            $("#idea-" + result.id).html("");
         }
     });
 }
 
-//$('.delete').on("click", function(){console.log("Hello");});
-
 $('document').ready(function(){
     $('#submit').on("click", submitIdea);
     $('#ideas').delegate(".delete", "click", deleteIdea)
-    //$('.delete').on("click", deleteIdea);
 });
