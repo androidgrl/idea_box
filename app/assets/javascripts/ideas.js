@@ -13,9 +13,16 @@ function submitIdea(event){
 }
 
 function postData(){
-    $.post('/ideas', formData(), function(data){
-        $('#ideas').prepend(data);
+    $.post('/ideas', formData(), function(idea){
+        console.log(idea);
+        $('#ideas').prepend(makeIdea(idea));
+        $('#idea_title').val('');
+        $('#idea_body').val('');
     });
+}
+
+function makeIdea(idea){
+    return "<li>" + idea.title + "</li>"
 }
 
 $('document').ready(function(){

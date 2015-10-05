@@ -6,8 +6,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.create(idea_params)
-    @idea.save
-    respond_with @idea, status: 201, location: root_path
+    render json: {title: @idea.title, body: @idea.body}
   end
 
   def destroy
