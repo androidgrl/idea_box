@@ -1,7 +1,10 @@
 class IdeasController < ApplicationController
+  respond_to :json
+
   def index
     @idea = Idea.new
     @ideas = Idea.newest_first
+    respond_with @ideas
   end
 
   def create
