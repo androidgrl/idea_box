@@ -1,30 +1,25 @@
 function formData(){
     return {
         idea: {
-            title: $('#idea_title').val(),
-            body: $('#idea_body').val()
+            title: $('#title').val(),
+            body: $('#body').val()
         }
     };
 }
 
-function submitIdea(event){
-    event.preventDefault();
+function submitIdea(){
     postData();
 }
 
 function postData(){
-    $.post('/ideas', formData(), function(idea){
-        console.log(idea);
-        $('#ideas').prepend(makeIdea(idea));
-        $('#idea_title').val('');
-        $('#idea_body').val('');
+    $.post('/ideas', formData(), function(data){
+        console.log(data);
+        $('#ideas').prepend("<li>" + data.title + "</li>");
+        $('#title').val('');
+        $('#body').val('');
     });
 }
 
-function makeIdea(idea){
-    return "<li>" + idea.title + "</li>"
-}
-
 $('document').ready(function(){
-    $('#new_idea').submit(submitIdea);
+    $('#submit').on("click", submitIdea);
 });

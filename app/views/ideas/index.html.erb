@@ -1,14 +1,9 @@
 <h1>Ideas:</h1>
 <ul id="ideas">
   <% @ideas.each do |idea| %>
-    <li>Created At: <%= time_ago_in_words(idea.created_at) %></li>
     <li>Title:  <%= idea.title %></li>
     <li>Body:  <%= truncate(idea.body, length: 103, separator: ' ') %></li>
     <li>Quality:  <%= idea.quality %></li>
-    <li><%= button_to "Delete", idea, method: :delete %></li>
-    <li><%= button_to "Edit", edit_idea_path(idea), method: :get %></li>
-    <li><%= button_to "Thumbs Up", thumbs_up_path(idea), method: :get %></li>
-    <li><%= button_to "Thumbs Down", thumbs_down_path(idea), method: :get %></li>
     </br>
   <% end %>
 </ul>
