@@ -9,7 +9,7 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.create(idea_params)
-    render json: {title: @idea.title, body: @idea.body, id: @idea.id}
+    render json: {title: @idea.title, body: @idea.body, id: @idea.id, quality: @idea.quality}
   end
 
   def destroy
@@ -29,13 +29,14 @@ class IdeasController < ApplicationController
   end
 
   def thumbs_up
-    idea = Idea.find(params[:id])
-    if idea.quality == "Swill"
-      idea.update_attributes(quality: "Plausible")
-    elsif idea.quality == "Plausible"
-      idea.update_attributes(quality: "Genius")
+    @idea = Idea.find(params[:id])
+    if @idea.quality == "Swill"
+      @idea.update_attributes(quality: "Plausible")
+    elsif @idea.quality == "Plausible"
+      @idea.update_attributes(quality: "Genius")
     end
-    redirect_to root_path
+    #redirect_to root_path
+    respond_with @idea
   end
 
   def thumbs_down
