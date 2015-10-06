@@ -28,9 +28,9 @@ function makeIdea(data){
         + "<li>" + "Body:  " + truncated + "</li>"
         + "<li>Quality:  Swill</li>"
         + "<button class='delete' id="+ data.id +">Delete</button></br>"
-        + "<button id='edit'>Edit</button></br>"
-        + "<button id='thumbs_up'>Thumbs Up</button></br>"
-        + "<button id='thumbs_down'>Thumbs Down</button></br>"
+        + "<button class='edit'>Edit</button></br>"
+        + "<button class='thumbs_up'>Thumbs Up</button></br>"
+        + "<button class='thumbs_down'>Thumbs Down</button></br>"
         + "</br>"
         + "</div>"
 }

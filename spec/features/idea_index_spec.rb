@@ -12,6 +12,8 @@ describe "Idea Index", :type => :feature, :js => true do
     expect(page).to have_content("Make echinacea tea")
     expect(page).to have_content("Swill")
     expect_idea_to_have_title(title: "Make Tea")
+
+    click_on "1"
   end
 
   it "lists ideas in descending chronological order" do
@@ -28,6 +30,9 @@ describe "Idea Index", :type => :feature, :js => true do
     within all("li")[0] do
       expect(page).to have_content("Make Soup")
     end
+
+    click_on "2"
+    click_on "3"
   end
 
   it "has a body that is truncated to 100 characters rounded to the nearest word" do
@@ -36,15 +41,18 @@ describe "Idea Index", :type => :feature, :js => true do
     fill_in "Body", with: "#{"aaaa " * 30}"
     click_link_or_button "Save"
     expect(page).to have_content("aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa...")
+
+    click_on "4"
   end
 
-  xit "can delete an item" do
+  it "can delete an item" do
     visit root_path
     fill_in "Title", with: "Hello"
     fill_in "Body", with: "Say hello to everyone"
     click_link_or_button "Save"
 
-    click_on "Delete"
+    save_and_open_page
+    click_on "5"
     expect(page).not_to have_content("Hello")
   end
 
