@@ -20,6 +20,7 @@ class IdeasController < ApplicationController
 
   def edit
     @idea = Idea.find(params[:id])
+    respond_with @idea
   end
 
   def update
@@ -35,7 +36,6 @@ class IdeasController < ApplicationController
     elsif @idea.quality == "Plausible"
       @idea.update_attributes(quality: "Genius")
     end
-    #redirect_to root_path
     respond_with @idea
   end
 
