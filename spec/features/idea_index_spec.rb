@@ -51,9 +51,35 @@ describe "Idea Index", :type => :feature, :js => true do
     fill_in "Body", with: "Say hello to everyone"
     click_link_or_button "Save"
 
-    save_and_open_page
     click_on "5"
     expect(page).not_to have_content("Hello")
+  end
+
+  it "can thumbs up an idea" do
+    visit root_path
+    fill_in "Title", with: "Make Tea"
+    fill_in "Body", with: "Make echinacea tea"
+    click_link_or_button "Save"
+    expect(page).to have_content("Swill")
+
+    click_on "Thumbs Up"
+    expect(page).not_to have_content("Swill")
+    expect(page).to have_content("Plausible")
+
+    click_on "6"
+  end
+
+  it "can thumbs down an idea" do
+    visit root_path
+    fill_in "Title", with: "Make Tea"
+    fill_in "Body", with: "Make echinacea tea"
+    click_link_or_button "Save"
+    click_on "Thumbs Up"
+
+    click_on "Thumbs Down"
+    expect(page).to have_content("Swill")
+
+    click_on "7"
   end
 
   xit "can edit an item" do
@@ -65,29 +91,5 @@ describe "Idea Index", :type => :feature, :js => true do
     click_on "Edit"
     fill_in "Title", with: "Drink Tea"
     fill_in "Body", with: "Savor and sip echinacea tea"
-  end
-
-  xit "can thumbs up an idea" do
-    visit root_path
-    fill_in "Title", with: "Make Tea"
-    fill_in "Body", with: "Make echinacea tea"
-    click_link_or_button "Save"
-    expect(page).to have_content("Swill")
-
-    click_on "Thumbs Up"
-    #expect(page).to have_http_status(200)
-    expect(page).not_to have_content("Swill")
-    expect(page).to have_content("Plausible")
-  end
-
-  xit "can thumbs up an idea" do
-    visit root_path
-    fill_in "Title", with: "Make Tea"
-    fill_in "Body", with: "Make echinacea tea"
-    click_link_or_button "Save"
-    click_on "Thumbs Up"
-
-    click_on "Thumbs Down"
-    expect(page).to have_content("Swill")
   end
 end
