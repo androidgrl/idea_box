@@ -77,10 +77,23 @@ function loadIdeas(){
 function upIdea(){
     console.log("Thumbing up idea");
     $.ajax({
-        url: '/thumbs_up/' + this.id.slice(3,6) + '.json',
+        url: '/thumbs_up/' + this.id.slice(3) + '.json',
         type: 'GET',
         success: function(data){
             console.log("I have been thumbed up thank you");
+            console.log(data);
+            $('#quality-' + data.id).html("Quality:  " + data.quality);
+        }
+    });
+}
+
+function downIdea(){
+    console.log("Thumbing down idea");
+    $.ajax({
+        url: "/thumbs_down/" + this.id.slice(5) + '.json',
+        type: 'GET',
+        success: function(data){
+            console.log("I have been thumbed dwon boo hoo");
             console.log(data);
             $('#quality-' + data.id).html("Quality:  " + data.quality);
         }
@@ -91,5 +104,6 @@ $('document').ready(function(){
     $('#submit').on("click", submitIdea);
     $('#ideas').delegate(".delete", "click", deleteIdea);
     $('#ideas').delegate(".thumbs_up", "click", upIdea);
+    $('#ideas').delegate(".thumbs_down", "click", downIdea);
     loadIdeas();
 });
