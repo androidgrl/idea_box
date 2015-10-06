@@ -26,11 +26,11 @@ function makeIdea(data){
     return  "<div id=idea-" + data.id + ">"
         + "<li>" + "Title:  " + data.title + "</li>"
         + "<li>" + "Body:  " + truncated + "</li>"
-        + "<li>Quality:  Swill</li>"
+        + "<li>" + "Quality:  " + data.quality + "</li>"
         + "<button class='delete' id="+ data.id +">Delete</button></br>"
-        + "<button class='edit'>Edit</button></br>"
-        + "<button class='thumbs_up'>Thumbs Up</button></br>"
-        + "<button class='thumbs_down'>Thumbs Down</button></br>"
+        + "<button class='edit' id="+ "edit-" + data.id +">Edit</button></br>"
+        + "<button class='thumbs_up' id="+ "up-" + data.id +">Thumbs Up</button></br>"
+        + "<button class='thumbs_down' id=" + "down-" + data.id +">Thumbs Down</button></br>"
         + "</br>"
         + "</div>"
 }
@@ -74,8 +74,21 @@ function loadIdeas(){
     });
 }
 
+function upIdea(){
+    console.log("Thumbing up idea");
+    $.ajax({
+        url: '/thumbs_up/' + this.id.slice(3,6) + '.json',
+        type: 'GET',
+        success: function(data){
+            console.log("I have been thumbed up thank you");
+            console.log(data);
+        }
+    });
+}
+
 $('document').ready(function(){
     $('#submit').on("click", submitIdea);
     $('#ideas').delegate(".delete", "click", deleteIdea);
+    $('#ideas').delegate(".thumbs_up", "click", upIdea);
     loadIdeas();
 });
