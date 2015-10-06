@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 describe "Idea Index", :type => :feature, :js => true do
+
   it "lists an idea" do
     visit root_path
-    fill_in "Title", with: "Make Tea"
-    fill_in "Body", with: "Make echinacea tea"
+    fill_in "title", with: "Make Tea"
+    fill_in "body", with: "Make echinacea tea"
     click_link_or_button "Save"
 
     expect(page).to have_content("Make Tea")
@@ -18,15 +19,13 @@ describe "Idea Index", :type => :feature, :js => true do
     fill_in "Title", with: "Make Tea"
     fill_in "Body", with: "Make echinacea tea"
     click_link_or_button "Save"
-    #expect(page).to have_http_status(201)
 
     visit root_path
     fill_in "Title", with: "Make Soup"
     fill_in "Body", with: "Make chicken soup"
     click_link_or_button "Save"
-    #expect(page).to have_http_status(201)
 
-    within all("li")[1] do
+    within all("li")[0] do
       expect(page).to have_content("Make Soup")
     end
   end
@@ -41,12 +40,12 @@ describe "Idea Index", :type => :feature, :js => true do
 
   xit "can delete an item" do
     visit root_path
-    fill_in "Title", with: "Make Tea"
-    fill_in "Body", with: "Make echinacea tea"
+    fill_in "Title", with: "Hello"
+    fill_in "Body", with: "Say hello to everyone"
     click_link_or_button "Save"
 
     click_on "Delete"
-    expect(page).not_to have_content("Make Tea")
+    expect(page).not_to have_content("Hello")
   end
 
   xit "can edit an item" do
@@ -81,7 +80,6 @@ describe "Idea Index", :type => :feature, :js => true do
     click_on "Thumbs Up"
 
     click_on "Thumbs Down"
-    #expect(page).to have_http_status(200)
     expect(page).to have_content("Swill")
   end
 end
