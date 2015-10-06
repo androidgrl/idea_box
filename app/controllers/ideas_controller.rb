@@ -40,13 +40,13 @@ class IdeasController < ApplicationController
   end
 
   def thumbs_down
-    idea = Idea.find(params[:id])
-    if idea.quality == "Genius"
-      idea.update_attributes(quality: "Plausible")
-    elsif idea.quality == "Plausible"
-      idea.update_attributes(quality: "Swill")
+    @idea = Idea.find(params[:id])
+    if @idea.quality == "Genius"
+      @idea.update_attributes(quality: "Plausible")
+    elsif @idea.quality == "Plausible"
+      @idea.update_attributes(quality: "Swill")
     end
-    redirect_to root_path
+    respond_with @idea
   end
 
   private
