@@ -100,10 +100,44 @@ function downIdea(){
     });
 }
 
+function editIdea(){
+    console.log("Editing idea");
+    var id = this.id.slice(5);
+    window.location.href = "/ideas/" + id + "/edit";
+}
+
+function updateIdea(){
+    console.log("Updating your idea");
+    console.log($('#edit-title').val());
+    console.log($('#edit-id').val());
+    var id = $('#edit-id').val();
+    $.ajax({
+        url: "/ideas/" + id,
+        type: "PUT",
+        data: editedData(),
+        success: function(data){
+            console.log("Updated your idea");
+            console.log(data);
+        }
+    });
+    window.location.href = "/";
+}
+
+function editedData(){
+    return {
+        idea: {
+            title: $('#edit-title').val(),
+            body: $('#edit-body').val()
+        }
+    };
+}
+
 $('document').ready(function(){
     $('#submit').on("click", submitIdea);
     $('#ideas').delegate(".delete", "click", deleteIdea);
     $('#ideas').delegate(".thumbs_up", "click", upIdea);
     $('#ideas').delegate(".thumbs_down", "click", downIdea);
+    $('#ideas').delegate(".edit", "click", editIdea);
+    $('#edit').on("click", updateIdea);
     loadIdeas();
 });
