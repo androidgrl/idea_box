@@ -23,14 +23,15 @@ function makeIdea(data){
     console.log(data);
     var text = data.body;
     var truncated = truncateString(text, 100, ' ', '...');
-    return  "<div id=idea-" + data.id + ">"
+    return  "<div id=idea-" + data.id + " class='idea' data-title=" + data.title
+        + " data-body=" + data.body + ">"
         + "<li>" + "Title:  " + data.title + "</li>"
         + "<li>" + "Body:  " + truncated + "</li>"
         + "<li id="+ "quality-" + data.id +">" + "Quality:  " + data.quality + "</li>"
-        + "<button class='delete' id="+ data.id +">Delete</button></br>"
-        + "<button class='edit' id="+ "edit-" + data.id +">Edit</button></br>"
-        + "<button class='thumbs_up' id="+ "up-" + data.id +">Thumbs Up</button></br>"
-        + "<button class='thumbs_down' id=" + "down-" + data.id +">Thumbs Down</button></br>"
+        + "<li><button class='delete' id="+ data.id +">Delete</button></li>"
+        + "<li><button class='edit' id="+ "edit-" + data.id +">Edit</button></li>"
+        + "<li><button class='thumbs_up' id="+ "up-" + data.id +">Thumbs Up</button></li>"
+        + "<li><button class='thumbs_down' id=" + "down-" + data.id +">Thumbs Down</button></li>"
         + "</br>"
         + "</div>"
 }
@@ -132,6 +133,25 @@ function editedData(){
     };
 }
 
+function filterIdeas(){
+    console.log("Filtering your ideas");
+    $(".idea li").hide();
+}
+
+//$(“#dino-list li”).hide();
+
+//$(“#dino-search”).on(“keyup click input”, function () {
+//if (this.value.length > 0) {
+  //$(“#dino-list li”).hide().filter(function () {
+    //return $(this).text().toLowerCase().indexOf($(“#dino-search”).val().toLowerCase()) != -1;
+  //}).show();
+//}
+//else {
+  //$(“#dino-list li”).hide();
+//}
+//});
+
+
 $('document').ready(function(){
     $('#submit').on("click", submitIdea);
     $('#ideas').delegate(".delete", "click", deleteIdea);
@@ -139,5 +159,6 @@ $('document').ready(function(){
     $('#ideas').delegate(".thumbs_down", "click", downIdea);
     $('#ideas').delegate(".edit", "click", editIdea);
     $('#edit').on("click", updateIdea);
+    $('#search').on("keyup", filterIdeas);
     loadIdeas();
 });
