@@ -26,7 +26,7 @@ function makeIdea(data){
     return  "<div id=idea-" + data.id + ">"
         + "<li>" + "Title:  " + data.title + "</li>"
         + "<li>" + "Body:  " + truncated + "</li>"
-        + "<li>" + "Quality:  " + data.quality + "</li>"
+        + "<li id="+ "quality-" + data.id +">" + "Quality:  " + data.quality + "</li>"
         + "<button class='delete' id="+ data.id +">Delete</button></br>"
         + "<button class='edit' id="+ "edit-" + data.id +">Edit</button></br>"
         + "<button class='thumbs_up' id="+ "up-" + data.id +">Thumbs Up</button></br>"
@@ -82,6 +82,7 @@ function upIdea(){
         success: function(data){
             console.log("I have been thumbed up thank you");
             console.log(data);
+            $('#quality-' + data.id).html("Quality:  " + data.quality);
         }
     });
 }
