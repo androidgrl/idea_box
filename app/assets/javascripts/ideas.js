@@ -25,8 +25,8 @@ function makeIdea(data){
     var truncated = truncateString(text, 100, ' ', '...');
     return  "<div id=idea-" + data.id + " class='idea' data-title=" + data.title
         + " data-body=" + data.body + ">"
-        + "<li>" + "Title:  " + data.title + "</li>"
-        + "<li>" + "Body:  " + truncated + "</li>"
+        + "<li id='search-title'>" + "Title:  " + data.title + "</li>"
+        + "<li id='search-body'>" + "Body:  " + truncated + "</li>"
         + "<li id="+ "quality-" + data.id +">" + "Quality:  " + data.quality + "</li>"
         + "<li><button class='delete' id="+ data.id +">Delete</button></li>"
         + "<li><button class='edit' id="+ "edit-" + data.id +">Edit</button></li>"
@@ -135,7 +135,16 @@ function editedData(){
 
 function filterIdeas(){
     console.log("Filtering your ideas");
-    $(".idea li").hide();
+    console.log(this.value);
+    if (this.value.length > 0) {
+        $(".idea").hide().filter(function () {
+            return $(this).text().toLowerCase().indexOf($("#search").val().toLowerCase()) != -1;
+        }).show();
+    } else if (this.value.length === 0) {
+        $(".idea").show();
+    } else {
+        $(".idea li").hide();
+    }
 }
 
 //$(“#dino-list li”).hide();
