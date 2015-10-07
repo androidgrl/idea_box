@@ -20,7 +20,6 @@ function postData(){
 }
 
 function makeIdea(data){
-    //console.log(data);
     var text = data.body;
     var truncated = truncateString(text, 100, ' ', '...');
     return  "<div id=idea-" + data.id + " class='idea' data-title=" + data.title
@@ -67,7 +66,6 @@ function loadIdeas(){
         url: '/ideas.json',
         type: 'GET',
         success: function(data){
-            //console.log(data);
             data.forEach(function(idea){
                 $('#ideas').append(makeIdea(idea));
             });
@@ -133,29 +131,6 @@ function editedData(){
     };
 }
 
-//function filterIdeas(){
-    //console.log("Filtering your ideas");
-    //var titleObjects = $('.search-title');
-    //var bodyObjects = $('.search-body');
-    //var searchTitles = titleObjects.map(function(index, title){
-        //return title.innerHTML.substr(8);
-    //});
-    //var searchBodies = bodyObjects.map(function(index, body){
-        //return body.innerHTML.substr(7);
-    //});
-    //var searchText = searchTitles + searchBodies;
-    //console.log(searchText);
-    //if (this.value.length > 0) {
-        //$(".idea").hide().filter(function () {
-            //return $(this).text().toLowerCase().indexOf($("#search").val().toLowerCase()) != -1;
-        //}).show();
-    //} else if (this.value.length === 0) {
-        //$(".idea").show();
-    //} else {
-        //$(".idea li").hide();
-    //}
-//}
-
 function filterIdeas(){
     console.log("Filtering your ideas");
     if (this.value.length > 0) {
@@ -174,7 +149,6 @@ function filterIdeas(){
         $(".idea").show();
     }
 }
-
 
 $('document').ready(function(){
     $('#submit').on("click", submitIdea);
