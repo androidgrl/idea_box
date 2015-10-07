@@ -20,13 +20,13 @@ function postData(){
 }
 
 function makeIdea(data){
-    console.log(data);
+    //console.log(data);
     var text = data.body;
     var truncated = truncateString(text, 100, ' ', '...');
     return  "<div id=idea-" + data.id + " class='idea' data-title=" + data.title
         + " data-body=" + data.body + ">"
-        + "<li id='search-title'>" + "Title:  " + data.title + "</li>"
-        + "<li id='search-body'>" + "Body:  " + truncated + "</li>"
+        + "<li class='search-title'>" + "Title:  " + data.title + "</li>"
+        + "<li class='search-body'>" + "Body:  " + truncated + "</li>"
         + "<li id="+ "quality-" + data.id +">" + "Quality:  " + data.quality + "</li>"
         + "<li><button class='delete' id="+ data.id +">Delete</button></li>"
         + "<li><button class='edit' id="+ "edit-" + data.id +">Edit</button></li>"
@@ -67,7 +67,7 @@ function loadIdeas(){
         url: '/ideas.json',
         type: 'GET',
         success: function(data){
-            console.log(data);
+            //console.log(data);
             data.forEach(function(idea){
                 $('#ideas').append(makeIdea(idea));
             });
@@ -133,32 +133,47 @@ function editedData(){
     };
 }
 
+//function filterIdeas(){
+    //console.log("Filtering your ideas");
+    //var titleObjects = $('.search-title');
+    //var bodyObjects = $('.search-body');
+    //var searchTitles = titleObjects.map(function(index, title){
+        //return title.innerHTML.substr(8);
+    //});
+    //var searchBodies = bodyObjects.map(function(index, body){
+        //return body.innerHTML.substr(7);
+    //});
+    //var searchText = searchTitles + searchBodies;
+    //console.log(searchText);
+    //if (this.value.length > 0) {
+        //$(".idea").hide().filter(function () {
+            //return $(this).text().toLowerCase().indexOf($("#search").val().toLowerCase()) != -1;
+        //}).show();
+    //} else if (this.value.length === 0) {
+        //$(".idea").show();
+    //} else {
+        //$(".idea li").hide();
+    //}
+//}
+
 function filterIdeas(){
     console.log("Filtering your ideas");
-    console.log(this.value);
     if (this.value.length > 0) {
-        $(".idea").hide().filter(function () {
-            return $(this).text().toLowerCase().indexOf($("#search").val().toLowerCase()) != -1;
-        }).show();
-    } else if (this.value.length === 0) {
+        $(".idea").hide();
+        $(".idea").each(function(index, idea){
+            var titleAndBody = idea.firstChild.innerHTML.substr(8) + idea.firstChild.nextSibling.innerHTML.substr(7);
+            console.log(titleAndBody);
+            if (titleAndBody.indexOf($("#search").val().toLowerCase()) != -1) {
+                console.log("Match");
+                $(this).show();
+            } else {
+                console.log("No match");
+            }
+        });
+    } else if (this.value.length === 0){
         $(".idea").show();
-    } else {
-        $(".idea li").hide();
     }
 }
-
-//$(“#dino-list li”).hide();
-
-//$(“#dino-search”).on(“keyup click input”, function () {
-//if (this.value.length > 0) {
-  //$(“#dino-list li”).hide().filter(function () {
-    //return $(this).text().toLowerCase().indexOf($(“#dino-search”).val().toLowerCase()) != -1;
-  //}).show();
-//}
-//else {
-  //$(“#dino-list li”).hide();
-//}
-//});
 
 
 $('document').ready(function(){
